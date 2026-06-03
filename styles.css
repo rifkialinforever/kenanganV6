@@ -1,0 +1,316 @@
+:root {
+  --color-ungu: #4c1d95;
+  --color-violet: #8b5cf6;
+  --color-biru-muda: #7dd3fc;
+  /* Dynamic Flame Colors */
+  --flame-color: #f59e0b;
+  --flame-glow-1: rgba(245, 158, 11, 0.6);
+  --flame-glow-2: rgba(239, 68, 68, 0.95);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: radial-gradient(circle at center, #2e1065, #1e1b4b, #020617);
+  color: white;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.romantic-font {
+  font-family: "Dancing Script", cursive;
+}
+
+/* PRELOADER */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #020617;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 1s ease,
+    visibility 1s;
+}
+
+.loader-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--color-violet);
+  padding: 5px;
+  animation: pulse-glow 2s infinite;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (min-width: 640px) {
+  .loader-logo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px var(--color-ungu);
+    border-color: var(--color-violet);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px var(--color-biru-muda);
+    border-color: var(--color-biru-muda);
+  }
+}
+
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* SPACE CANVAS */
+#space-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* FALLING FLOWERS CANVAS */
+#flowers-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* FIREWORKS CANVAS */
+#fireworks-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* GLASS EFFECTS */
+.glass {
+  background: rgba(76, 29, 149, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.gallery-item {
+  content-visibility: auto;
+  contain-intrinsic-size: 250px;
+}
+
+.counter-number {
+  background: linear-gradient(to bottom, #fff, var(--color-biru-muda));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* MODALS */
+#imagePreviewModal,
+#uploadModal,
+#streakInfoModal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(2, 6, 23, 0.96);
+  backdrop-filter: blur(20px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+@media (min-width: 640px) {
+  #imagePreviewModal,
+  #uploadModal,
+  #streakInfoModal {
+    padding: 24px;
+  }
+}
+
+#imagePreviewModal.active,
+#uploadModal.active,
+#streakInfoModal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.preview-content {
+  max-width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (min-width: 768px) {
+  .preview-content {
+    max-height: 70vh;
+  }
+}
+
+#imagePreviewModal.active .preview-content {
+  transform: scale(1);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-violet);
+  border-radius: 10px;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* 3D FOLDER REALISTIS BUKA-TUTUP STYLES (SUPER RESPONSIVE) */
+.folder-wrapper {
+  perspective: 1000px;
+  user-select: none;
+}
+
+/* Responsivitas Ukuran Folder */
+.folder-container {
+  width: 5.5rem; /* ~88px di mobile */
+  height: 6.5rem; /* ~104px di mobile */
+}
+
+@media (min-width: 640px) {
+  .folder-container {
+    width: 7rem; /* ~112px di tablet/desktop */
+    height: 8rem; /* ~128px di tablet/desktop */
+  }
+}
+
+.folder-back {
+  background: rgba(30, 27, 75, 0.7);
+  border: 1.5px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.folder-front {
+  transform-origin: bottom;
+  transition:
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
+  background: rgba(109, 40, 217, 0.4);
+  border: 1.5px solid rgba(139, 92, 246, 0.5);
+  border-radius: 12px;
+}
+
+/* Elemen Kertas di Dalam Folder */
+.folder-paper-1 {
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: linear-gradient(135deg, #f0f9ff, #bae6fd);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.folder-paper-2 {
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: linear-gradient(135deg, #fdf2f8, #fbcfe8);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Efek Hover (Folder Mulai Terbuka Sedikit) */
+.folder-container:hover .folder-front {
+  transform: rotateX(-25deg);
+  background: rgba(139, 92, 246, 0.5);
+  border-color: rgba(139, 92, 246, 0.7);
+}
+
+.folder-container:hover .folder-paper-1 {
+  transform: translateY(-16px) rotate(-4deg);
+}
+
+.folder-container:hover .folder-paper-2 {
+  transform: translateY(-12px) rotate(5deg);
+}
+
+/* Efek Tangguh / Terbuka Sempurna (Saat Folder Diklik) */
+.folder-container.active .folder-front {
+  transform: rotateX(-50deg);
+  background: rgba(139, 92, 246, 0.6);
+  border-color: rgba(125, 211, 252, 0.9);
+  box-shadow:
+    0 15px 30px rgba(139, 92, 246, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+.folder-container.active .folder-paper-1 {
+  transform: translateY(-28px) rotate(-8deg) scale(1.05);
+}
+
+.folder-container.active .folder-paper-2 {
+  transform: translateY(-24px) rotate(8deg) scale(1.05);
+}
+
+.folder-container.active .folder-title {
+  color: #7dd3fc !important;
+  text-shadow: 0 0 10px rgba(125, 211, 252, 0.5);
+}
+
+@keyframes fire-flicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 6px var(--flame-glow-1));
+  }
+  50% {
+    transform: scale(1.2) rotate(-5deg);
+    filter: drop-shadow(0 0 16px var(--flame-glow-2));
+  }
+}
+.animate-fire {
+  animation: fire-flicker 1.2s infinite ease-in-out;
+  color: var(--flame-color) !important;
+  transition: color 0.5s ease;
+}
+
+/* ANIMASI GLOW & DENYUT BUKET BUNGA */
+@keyframes float-bouquet {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+.bouquet-float {
+  animation: float-bouquet 5.5s ease-in-out infinite;
+}
