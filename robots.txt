@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: /sitemap.xml
+
+# Disallow crawling of certain paths if needed
+# Disallow: /admin/
+# Disallow: /private/
